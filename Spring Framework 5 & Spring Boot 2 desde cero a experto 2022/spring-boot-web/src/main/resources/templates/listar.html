@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://wwww.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${titulo}"></title>
+</head>
+<body>
+	<h1 th:text="${titulo}"></h1>
+
+	<div th:if="${usuarios.size() == 0}">No hay usuarios en la BBDD</div>
+
+	<!-- 		También se puede usar para listados el .isEmpty() y su negación !elemento.isEmpty() -->
+	<h2>Listado de Usuarios conn email</h2>
+	<table th:if="${usuarios.size() != 0}">
+		<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>Apellido</th>
+				<th>Email</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="usuario: ${usuarios}">
+				<td th:text="${usuario.nombre}"></td>
+				<td th:text="${usuario.apellido}"></td>
+				<td th:text="${usuario.email}"></td>
+			</tr>
+		</tbody>
+	</table>
+	<h2>Listado de Usuarios sin email</h2>
+	<table th:if="${usuarios.size() != 0}">
+		<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>Apellido</th>
+				<th>Email</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="usuario: ${usuarios}">
+				<td th:if="${usuario.email == null}" th:text="${usuario.nombre}"></td>
+				<td th:if="${usuario.email == null}" th:text="${usuario.apellido}"></td>
+				<td th:if="${usuario.email == null}" th:text="${usuario.email}"></td>
+			</tr>
+		</tbody>
+	</table>
+
+</body>
+</html>
